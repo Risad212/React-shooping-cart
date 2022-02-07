@@ -74,9 +74,8 @@ header {
   justify-content: flex-end;
 }
 
-.cart-icon .cart{
-  font-size: 18px;
-  color: #2f80ed;
+.cart-icon .card{
+  font-size: 50px;
 }
 
 .cart-icon p {
@@ -145,7 +144,7 @@ header {
 .cart-items-container {
   width: 90%;
   height: 56rem;
-  overflow-y: scroll;
+  overflow-x: scroll;
 }
 
 .items-info {

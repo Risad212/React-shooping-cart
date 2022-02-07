@@ -1,28 +1,25 @@
-import React, { createContext, useReducer } from 'react';
-import {products} from './Products'
-import './Cart.css'
-import CartContext from './CartContext';
+import React, { createContext, useEffect, useReducer } from 'react';
+import ContextCart from './ContextCart';
+import { products } from './Product';
 import {reducer} from './Reducer'
+export const DataContext = createContext()
 
-
-export const ContextCart = createContext()
-
-const initalState = {
-  item: products,
-  totalAmount: 0,
-  totalItem: 0
+// initialState 
+const initialState = {
+    item: products,
+    totalItem: 0,
+    totalAmount: 0
 }
-
 const Cart = () => {
-    const [state, dispatch] = useReducer(reducer, initalState)
+    const [state, dispatch] = useReducer(reducer, initialState)
 
-    // remove indivitual item
     const removeItem = (id) =>{
-        dispatch({
-        type: 'REMOVE_ITEM',
-        payload: id,
-     })
+       dispatch({
+         type: 'REMOVE_ITEM',
+         payload: id,
+       })
     }
+
     const clearAll = () =>{
         dispatch({
          type: 'CLEAR_ALL'
@@ -31,8 +28,8 @@ const Cart = () => {
 
     const increment = (id) =>{
         dispatch({
-          type: 'INCREMENT',
-          payload: id,
+         type: 'INCREMENT',
+         payload: id,
         })
     }
 
@@ -43,10 +40,13 @@ const Cart = () => {
         })
     }
 
+    useEffect(() =>{
+        dispatch({type: 'GET_ALL'})
+    },[state.item])
     return (
-        <ContextCart.Provider value={{...state, removeItem,clearAll,increment, dicrement}}>
-          <CartContext />
-        </ContextCart.Provider>
+         <DataContext.Provider value={{...state,removeItem,clearAll,increment,dicrement}}>
+            <ContextCart />
+         </DataContext.Provider>
     );
 };
 

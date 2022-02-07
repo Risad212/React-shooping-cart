@@ -1,11 +1,12 @@
 import { faMinus, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext } from 'react';
-import { ContextCart } from './Cart';
-import './Cart.css'
+import { DataContext } from './Cart';
+import './Cart.css';
 
-const Item = ({title, quantity, id, description,img,price}) => {
-    const {removeItem,increment,dicrement} = useContext(ContextCart)
+
+const Item = ({id,title, description, img,quantity, price}) => {
+    const {removeItem,increment,dicrement} = useContext(DataContext)
     return (
         <>
          <div className="items-info">
@@ -21,7 +22,7 @@ const Item = ({title, quantity, id, description,img,price}) => {
         <div className="add-minus-quantity">
           <FontAwesomeIcon icon={faMinus} onClick={() => dicrement(id)}/>
           <input type="text" placeholder={quantity} disabled />
-          <FontAwesomeIcon icon={faPlus} onClick={() => increment(id)}/>
+          <FontAwesomeIcon icon={faPlus} onClick={() => increment(id)} />
         </div>
 
         <div className="price">
@@ -32,7 +33,6 @@ const Item = ({title, quantity, id, description,img,price}) => {
           <FontAwesomeIcon icon={faTrashAlt} onClick={() => removeItem(id)}/>
         </div>
       </div>
-
       <hr />
         </>
     );
